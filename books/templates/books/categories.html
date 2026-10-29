@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Категорії{% endblock %}
+
+{% block content %}
+<h1>Категорії</h1>
+<div class="row">
+    <div class="col">
+        {% for object in object_list %}
+        <div class="mb-2">
+            <a href="{% url 'books:category_detail' pk=object.id %}">
+                {{ object.name }}
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
