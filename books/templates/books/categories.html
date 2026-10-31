@@ -2,16 +2,32 @@
 {% block title %}Категорії{% endblock %}
 
 {% block content %}
-<h1>Категорії</h1>
+<h1 class="text-center my-4">Категорії</h1>
+
 <div class="row">
-    <div class="col">
-        {% for object in object_list %}
-        <div class="mb-2">
-            <a href="{% url 'books:category_detail' pk=object.id %}">
-                {{ object.name }}
-            </a>
-        </div>
-        {% endfor %}
+    <div class="col-md-8 mx-auto my-2">
+        <table class="table table-striped">
+            {% for object in object_list %}
+            <tr>
+                <td class="align-middle">
+                    <a href="{% url 'books:category_detail' pk=object.id %}">
+                        {{ object.name }}
+                    </a>
+                </td>
+                <td class="text-end">
+                    <a href="{% url 'books:category_update' pk=object.id %}">
+                        <button type="button" class="btn btn-outline-success btn-sm">Редагувати</button>
+                    </a>
+                </td>
+                <td class="text-end" style="width: 100px;">
+                    <a href="{% url 'books:category_delete' pk=object.id %}">
+                        <button type="button" class="btn btn-outline-danger btn-sm">Видалити</button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
 </div>
+
 {% endblock %}

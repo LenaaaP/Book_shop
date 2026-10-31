@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-md-4">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-outline-{% if klass %}{{ klass }}{% else %}primary{% endif %}">
+                {{ text }}
+            </button>
+        </form>
+    </div>
+</div>
