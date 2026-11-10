@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Книга{% endblock %}
+
+{% block content %}
+<h1 class="my-4">Інформація про Книги</h1>
+
+<div class="card">
+    <div class="card-header"> 
+        {{ object.name }}
+    </div>
+    <div class="card-body">
+        <p class="card-text">Ціна: {{ object.price }} грн.</p>
+        <p class="card-title">{{ object.description }}</p>
+        <a href="#" class="btn btn-primary">Замовити</a>
+    </div>
+</div>
+
+<a href="{% url 'books:book' %}" class="btn btn-outline-secondary">
+    Назад до списку
+</a>
+{% endblock %}

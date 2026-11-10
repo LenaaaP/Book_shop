@@ -1,7 +1,9 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name="Категорія")
+    #slug = models.SlugField() #доробити!!!!
 
     def __str__(self):
         return self.name
@@ -20,11 +22,11 @@ class Book(models.Model):
     in_stock = models.BooleanField(
         default=True, verbose_name='Наявність на складі',
     )
-    category = models.ForeignKey(
+    category = models.ManyToManyField(
         'books.Category',
-        on_delete=models.PROTECT,
         related_name='books',
-        verbose_name='Категорія',
+        verbose_name='Категорії',
+        blank=True
     )
 
     created = models.DateTimeField(auto_now_add=True)
@@ -36,3 +38,12 @@ class Book(models.Model):
 
     def __str__(self):
         return self.name
+
+
+    def clean(self):
+        if self.price is not None and self.price <= 0:
+            raise ValidationError('Ціна має бути більшою за 0!')
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)

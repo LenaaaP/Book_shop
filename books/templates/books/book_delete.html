@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Видалення книг{% endblock %}
+
+{% block content %}
+<h1 class="my-4">Видалення книги</h1>
+<h4>Ви дійсно бажаєте видалити <strong>{{ object }}</strong>?</h4>
+
+{% include 'form.html' with text='Підтвердити видалення' klass='danger' %}
+{% endblock %}
